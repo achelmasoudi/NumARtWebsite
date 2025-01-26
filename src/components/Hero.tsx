@@ -191,7 +191,11 @@ const Hero = () => {
                   className="text-white hover:text-green-500 transition-colors"
                   aria-label={isPlaying ? "Pause" : "Play"}
                 >
-                  {isPlaying ? <Pause size={24} /> : <Play size={24} />}
+                  {isPlaying ? (
+                    <Pause size={24} className="w-6 h-6" />
+                  ) : (
+                    <Play size={24} className="w-6 h-6" />
+                  )}
                 </button>
                 
                 <span className="text-white text-sm font-mono">
@@ -217,7 +221,11 @@ const Hero = () => {
                     className="text-white hover:text-green-500 transition-colors"
                     aria-label={isMuted ? "Unmute" : "Mute"}
                   >
-                    {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+                    {isMuted ? (
+                      <VolumeX size={20} className="w-5 h-5" />
+                    ) : (
+                      <Volume2 size={20} className="w-5 h-5" />
+                    )}
                   </button>
                   <input
                     type="range"
@@ -236,7 +244,7 @@ const Hero = () => {
                   onClick={() => videoRef.current.requestFullscreen()}
                   aria-label="Fullscreen"
                 >
-                  <Maximize size={20} />
+                  <Maximize size={20} className="w-5 h-5" />
                 </button>
               </div>
               
@@ -312,7 +320,7 @@ const Hero = () => {
                 whileTap={{ scale: 0.95 }}
                 className="bg-purple-800 text-white px-8 py-3 rounded-full flex items-center justify-center gap-2 hover:bg-purple-900 transition-colors cursor-pointer"
               >
-                <Download size={27} />
+                <Download size={27} className="w-6 h-6" />
                 Try Free Now
               </motion.a>
 
@@ -322,7 +330,7 @@ const Hero = () => {
                 onClick={() => setShowVideo(true)}
                 className="bg-white text-green-600 border-2 border-green-600 px-8 py-3 rounded-full flex items-center justify-center gap-2 hover:bg-green-50 transition-colors"
               >
-                <Play size={27} />
+                <Play size={27} className="w-6 h-6" />
                 Watch Demo
               </motion.button>
             </motion.div>
@@ -365,6 +373,19 @@ const Hero = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* Add global styles for Lucide icons */}
+      <style jsx global>{`
+        .lucide-icon {
+          stroke-width: 2px;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        svg {
+          shape-rendering: geometricPrecision;
+          text-rendering: optimizeLegibility;
+        }
+      `}</style>
     </div>
   );
 };
