@@ -13,7 +13,7 @@ const Hero = () => {
   const [duration, setDuration] = useState(0);
   const videoRef = useRef(null);
 
-  // Updated URLs with direct download parameters
+  // URLs
   const videoUrl = "https://www.dropbox.com/scl/fi/hmabkgyhoepsszwboqlc9/NumARt_demo.mp4?rlkey=t5etm70nydquclomsh4e9ga5y&st=gyqj8vch&dl=1";
   const backImageUrl = "https://www.dropbox.com/scl/fi/pq7hiekblf09os0kanz6k/back_pic.jpg?rlkey=tbcz97dd2sjkfc5ivg14pu2ok&st=17qn39f9&dl=1";
   const apkDownloadUrl = "https://www.dropbox.com/scl/fi/mbwuzv5ctr9jnfhvfxt5z/NumARt.apk?rlkey=se1ojwag9m91i4y26yo1g4qf2&st=sa9sugdx&dl=1";
@@ -21,20 +21,14 @@ const Hero = () => {
   const headingText = "Welcome to the magical world of NumARt 🪄";
   const subtitleText = "Let's play with numbers and learn amazing things together!";
   
-  // Animation timing calculations
+  // Animation timing
   const headingDuration = headingText.length * 0.03;
   const subtitleDuration = subtitleText.length * 0.02;
 
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.03,
-        when: "beforeChildren"
-      }
-    }
+    visible: { opacity: 1, transition: { staggerChildren: 0.03, when: "beforeChildren" } }
   };
 
   const letterVariants = {
@@ -42,11 +36,7 @@ const Hero = () => {
     visible: (i) => ({
       opacity: 1,
       y: 0,
-      transition: {
-        delay: i * 0.03,
-        type: "spring",
-        stiffness: 200
-      }
+      transition: { delay: i * 0.03, type: "spring", stiffness: 200 }
     })
   };
 
@@ -55,11 +45,7 @@ const Hero = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        delay: headingDuration + 0.1,
-        staggerChildren: 0.02,
-        when: "beforeChildren"
-      }
+      transition: { delay: headingDuration + 0.1, staggerChildren: 0.02 }
     }
   };
 
@@ -67,46 +53,24 @@ const Hero = () => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!showVideo) return;
-
       switch (e.key) {
-        case ' ':
-          e.preventDefault();
-          togglePlay();
-          break;
-        case 'ArrowRight':
-          seekVideo(5);
-          break;
-        case 'ArrowLeft':
-          seekVideo(-5);
-          break;
-        case 'm':
-        case 'M':
-          toggleMute();
-          break;
-        case 'f':
-        case 'F':
-          videoRef.current?.requestFullscreen();
-          break;
-        case 'Escape':
-          setShowVideo(false);
-          break;
+        case ' ': e.preventDefault(); togglePlay(); break;
+        case 'ArrowRight': seekVideo(5); break;
+        case 'ArrowLeft': seekVideo(-5); break;
+        case 'm': case 'M': toggleMute(); break;
+        case 'f': case 'F': videoRef.current?.requestFullscreen(); break;
+        case 'Escape': setShowVideo(false); break;
       }
     };
-
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [showVideo, isPlaying, isMuted]);
 
-  // Video control functions
+  // Video controls
   const togglePlay = () => {
     const video = videoRef.current;
-    if (video.paused) {
-      video.play();
-      setIsPlaying(true);
-    } else {
-      video.pause();
-      setIsPlaying(false);
-    }
+    video.paused ? video.play() : video.pause();
+    setIsPlaying(!video.paused);
   };
 
   const seekVideo = (seconds) => {
@@ -152,10 +116,7 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 backdrop-blur-sm"
-          onClick={() => {
-            setShowVideo(false);
-            videoRef.current.pause();
-          }}
+          onClick={() => { setShowVideo(false); videoRef.current.pause(); }}
         >
           <motion.div
             initial={{ scale: 0.8 }}
@@ -176,14 +137,16 @@ const Hero = () => {
               src={videoUrl}
             />
             
-            {/* Centered Loading Spinner */}
             {isLoading && (
               <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-50">
-                <Loader2 className="w-12 h-12 text-green-600 animate-spin" />
+                <Loader2 
+                  className="w-12 h-12 text-green-600 animate-spin"
+                  strokeWidth={2.5}
+                  absoluteStrokeWidth
+                />
               </div>
             )}
 
-            {/* Video Controls */}
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
               <div className="flex items-center gap-4 mb-2">
                 <button
@@ -192,9 +155,19 @@ const Hero = () => {
                   aria-label={isPlaying ? "Pause" : "Play"}
                 >
                   {isPlaying ? (
-                    <Pause size={24} className="w-6 h-6" />
+                    <Pause 
+                      size={24}
+                      className="w-6 h-6"
+                      strokeWidth={2.5}
+                      absoluteStrokeWidth
+                    />
                   ) : (
-                    <Play size={24} className="w-6 h-6" />
+                    <Play 
+                      size={24}
+                      className="w-6 h-6"
+                      strokeWidth={2.5}
+                      absoluteStrokeWidth
+                    />
                   )}
                 </button>
                 
@@ -222,9 +195,19 @@ const Hero = () => {
                     aria-label={isMuted ? "Unmute" : "Mute"}
                   >
                     {isMuted ? (
-                      <VolumeX size={20} className="w-5 h-5" />
+                      <VolumeX 
+                        size={20}
+                        className="w-5 h-5"
+                        strokeWidth={2.5}
+                        absoluteStrokeWidth
+                      />
                     ) : (
-                      <Volume2 size={20} className="w-5 h-5" />
+                      <Volume2 
+                        size={20}
+                        className="w-5 h-5"
+                        strokeWidth={2.5}
+                        absoluteStrokeWidth
+                      />
                     )}
                   </button>
                   <input
@@ -244,10 +227,14 @@ const Hero = () => {
                   onClick={() => videoRef.current.requestFullscreen()}
                   aria-label="Fullscreen"
                 >
-                  <Maximize size={20} className="w-5 h-5" />
+                  <Maximize 
+                    size={20}
+                    className="w-5 h-5"
+                    strokeWidth={2.5}
+                    absoluteStrokeWidth
+                  />
                 </button>
               </div>
-              
               <div className="text-center text-gray-300 text-xs mt-2">
                 Space: Play/Pause | ←→: Seek | M: Mute | F: Fullscreen | Esc: Close
               </div>
@@ -271,11 +258,7 @@ const Hero = () => {
               className="font-smooch-sans font-bold text-5xl md:text-6xl lg:text-6xl text-purple-800 mb-6"
             >
               {Array.from(headingText).map((char, index) => (
-                <motion.span
-                  key={index}
-                  variants={letterVariants}
-                  custom={index}
-                >
+                <motion.span key={index} variants={letterVariants} custom={index}>
                   {char}
                 </motion.span>
               ))}
@@ -287,11 +270,7 @@ const Hero = () => {
                 className="block text-green-600 mt-4 text-3xl md:text-4xl lg:text-4xl"
               >
                 {Array.from(subtitleText).map((char, index) => (
-                  <motion.span
-                    key={index}
-                    variants={letterVariants}
-                    custom={index}
-                  >
+                  <motion.span key={index} variants={letterVariants} custom={index}>
                     {char}
                   </motion.span>
                 ))}
@@ -320,7 +299,12 @@ const Hero = () => {
                 whileTap={{ scale: 0.95 }}
                 className="bg-purple-800 text-white px-8 py-3 rounded-full flex items-center justify-center gap-2 hover:bg-purple-900 transition-colors cursor-pointer"
               >
-                <Download size={27} className="w-6 h-6" />
+                <Download 
+                  size={27}
+                  className="w-6 h-6"
+                  strokeWidth={2.5}
+                  absoluteStrokeWidth
+                />
                 Try Free Now
               </motion.a>
 
@@ -330,7 +314,12 @@ const Hero = () => {
                 onClick={() => setShowVideo(true)}
                 className="bg-white text-green-600 border-2 border-green-600 px-8 py-3 rounded-full flex items-center justify-center gap-2 hover:bg-green-50 transition-colors"
               >
-                <Play size={27} className="w-6 h-6" />
+                <Play 
+                  size={27}
+                  className="w-6 h-6"
+                  strokeWidth={2.5}
+                  absoluteStrokeWidth
+                />
                 Watch Demo
               </motion.button>
             </motion.div>
@@ -374,16 +363,28 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Add global styles for Lucide icons */}
+      {/* Global Styles */}
       <style jsx global>{`
-        .lucide-icon {
-          stroke-width: 2px;
+        .lucide {
+          stroke-width: 2.5;
           stroke-linecap: round;
           stroke-linejoin: round;
-        }
-        svg {
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
           shape-rendering: geometricPrecision;
-          text-rendering: optimizeLegibility;
+          display: inline-block;
+          vertical-align: middle;
+        }
+        
+        svg {
+          color: inherit !important;
+          forced-color-adjust: auto;
+        }
+
+        @media screen and (-ms-high-contrast: active) {
+          .lucide {
+            stroke: windowText;
+          }
         }
       `}</style>
     </div>
