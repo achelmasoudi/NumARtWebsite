@@ -119,7 +119,7 @@ const Footer = () => {
               </motion.a>
 
               <motion.a
-                href="https://trello.com/your-board-url"
+                href="https://trello.com/b/FH85iuon/numart"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ y: -5 }}
