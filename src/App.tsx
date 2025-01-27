@@ -7,9 +7,12 @@ import Features from './components/Features';
 import Technology from './components/Technology';
 import Pricing from './components/Pricing';
 import Footer from './components/Footer';
+import CustomCursor from './components/CustomCursor';
 
 function App() {
   return (
+    <>
+    <CustomCursor />
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -26,6 +29,7 @@ function App() {
       </main>
       <Footer />
     </motion.div>
+    </>
   );
 }
 
