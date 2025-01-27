@@ -16,7 +16,7 @@ const Hero = () => {
   // URLs
   const videoUrl = "https://www.dropbox.com/scl/fi/hmabkgyhoepsszwboqlc9/NumARt_demo.mp4?rlkey=t5etm70nydquclomsh4e9ga5y&st=gyqj8vch&dl=1";
   const backImageUrl = "https://www.dropbox.com/scl/fi/pq7hiekblf09os0kanz6k/back_pic.jpg?rlkey=tbcz97dd2sjkfc5ivg14pu2ok&st=17qn39f9&dl=1";
-  const apkDownloadUrl = "dist/assets/NumARt.apk";
+  const apkDownloadUrl = "src/apk/NumARt.apk";
 
   const headingText = "Welcome to the magical world of NumARt 🪄";
   const subtitleText = "Let's play with numbers and learn amazing things together!";
