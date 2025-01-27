@@ -5,22 +5,22 @@ import { Brain, Star, Trophy, Users } from 'lucide-react';
 const Features = () => {
   const features = [
     {
-      icon: <Brain className="w-8 h-8 text-green-600" />,
+      icon: <Brain className="w-6 h-6 text-green-600" />, // Green icon color
       title: "Interactive Learning",
       description: "3D numbers and shapes that children can manipulate in real space"
     },
     {
-      icon: <Star className="w-8 h-8 text-green-600" />,
+      icon: <Star className="w-6 h-6 text-green-600" />, // Green icon color
       title: "Progress Tracking",
       description: "Real-time feedback and detailed progress reports for parents"
     },
     {
-      icon: <Trophy className="w-8 h-8 text-green-600" />,
+      icon: <Trophy className="w-6 h-6 text-green-600" />, // Green icon color
       title: "Achievement System",
       description: "Rewards and badges to keep children motivated"
     },
     {
-      icon: <Users className="w-8 h-8 text-green-600" />,
+      icon: <Users className="w-6 h-6 text-green-600" />, // Green icon color
       title: "Parent Dashboard",
       description: "Monitor your child's learning journey and customize their experience"
     }
@@ -86,11 +86,11 @@ const Features = () => {
               className="p-6 rounded-xl bg-white shadow-lg hover:shadow-xl transition-shadow"
             >
               <motion.div
-                className="mb-4"
+                className="mb-4 bg-green-100 p-2 rounded-lg w-fit" // Light green background with padding
                 whileHover="hover"
                 variants={iconVariants}
               >
-                {feature.icon}
+                {feature.icon} {/* Icon with green color */}
               </motion.div>
               <h3 className="text-xl font-bold text-gray-800 mb-2">{feature.title}</h3>
               <p className="text-gray-600">{feature.description}</p>

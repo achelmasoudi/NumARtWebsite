@@ -9,7 +9,7 @@ const Header = () => {
 
   // Add your Dropbox URLs here
   const iconUrl = "https://www.dropbox.com/scl/fi/yiwdx2zz9j213v27u38y9/NumARt_icon.png?rlkey=ngw61wleb4vjzm3zk87jucoxb&st=uudnon6s&dl=1";
-  const apkDownloadUrl = "https://www.dropbox.com/scl/fi/mbwuzv5ctr9jnfhvfxt5z/NumARt.apk?rlkey=se1ojwag9m91i4y26yo1g4qf2&st=d4yicoc9&dl=1";
+  const apkDownloadUrl = "dist/assets/NumARt.apk";
 
   useEffect(() => {
     const handleScroll = () => {
